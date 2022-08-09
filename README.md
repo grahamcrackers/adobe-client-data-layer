@@ -1,3 +1,4 @@
+
 ## Adobe Client Data Layer
 
 [![NPM version](https://badgen.net/npm/v/@adobe/adobe-client-data-layer)](https://www.npmjs.com/package/@adobe/adobe-client-data-layer)
@@ -34,8 +35,8 @@ This script can then be included in your page head, as follows:
 First run the following commands:
 ```
 npm install
-```   
- 
+```
+
 Then choose from the following npm scripts:
 * `npm run dev` - run the tests, generates the build in the `./dist` folder and runs a development server on `localhost:3000`.
 * `npm run build` - run the tests and generates the build in the `./dist` folder.
