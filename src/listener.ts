@@ -10,7 +10,7 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const CONSTANTS = require('./constants');
+import {CONSTANTS} from './constants';
 
 /**
  * Constructs a data layer listener.
@@ -18,7 +18,7 @@ const CONSTANTS = require('./constants');
  * @param {Item} item The item from which to construct the listener.
  */
 
-module.exports = function(item) {
+export const listener = (item) => {
   const _event = item.config.on || item.config.off;
   const _handler = item.config.handler || null;
   const _scope = item.config.scope || (item.config.on && CONSTANTS.listenerScope.ALL) || null;

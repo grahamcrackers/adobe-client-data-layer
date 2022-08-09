@@ -10,11 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../../custom-lodash');
-const find = _.find;
-const includes = _.includes;
+import find from "lodash/find";
+import includes from "lodash/includes";
 
-module.exports = function(data, constraints) {
+export const dataMatchesContraints = (data, constraints): boolean => {
   // Go through all constraints and find one which does not match the data
   const foundObjection = find(Object.keys(constraints), key => {
     const type = constraints[key].type;

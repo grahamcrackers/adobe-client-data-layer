@@ -10,10 +10,9 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../../custom-lodash');
-const isEqual = _.isEqual;
+import isEqual from "lodash/isEqual";
 
-module.exports = function(listeners, listener) {
+export const indexOfListener = (listeners, listener) => {
   const event = listener.event;
 
   if (Object.prototype.hasOwnProperty.call(listeners, event)) {

@@ -10,11 +10,10 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../../custom-lodash');
-const has = _.has;
+import has from "lodash/has";
 
-const CONSTANTS = require('../constants');
-const ancestorRemoved = require('./ancestorRemoved');
+import { CONSTANTS } from "../constants";
+import { ancestorRemoved } from "./ancestorRemoved";
 
 /**
  * Checks if the listener matches the item.
@@ -23,7 +22,7 @@ const ancestorRemoved = require('./ancestorRemoved');
  * @param {Item} item The item.
  * @returns {Boolean} true if listener matches the item, false otherwise.
  */
-function listenerMatch(listener, item) {
+export const listenerMatch = (listener, item): boolean => {
   const event = listener.event;
   const itemConfig = item.config;
   let matches = false;
@@ -33,7 +32,10 @@ function listenerMatch(listener, item) {
       matches = selectorMatches(listener, item);
     }
   } else if (item.type === CONSTANTS.itemType.EVENT) {
-    if (event === CONSTANTS.dataLayerEvent.EVENT || event === itemConfig.event) {
+    if (
+      event === CONSTANTS.dataLayerEvent.EVENT ||
+      event === itemConfig.event
+    ) {
       matches = selectorMatches(listener, item);
     }
     if (item.data && event === CONSTANTS.dataLayerEvent.CHANGE) {
@@ -42,7 +44,7 @@ function listenerMatch(listener, item) {
   }
 
   return matches;
-}
+};
 
 /**
  * Checks if a listener has a selector that points to an object in the data payload of an item.
@@ -50,14 +52,15 @@ function listenerMatch(listener, item) {
  * @param {Listener} listener The listener to extract the selector from.
  * @param {Item} item The item.
  * @returns {Boolean} true if a selector is not provided or if the given selector is matching, false otherwise.
+ *
  * @private
  */
-function selectorMatches(listener, item) {
+const selectorMatches = (listener, item): boolean => {
   if (item.data && listener.path) {
-    return has(item.data, listener.path) || ancestorRemoved(item.data, listener.path);
+    return (
+      has(item.data, listener.path) || ancestorRemoved(item.data, listener.path)
+    );
   }
 
   return true;
-}
-
-module.exports = listenerMatch;
+};

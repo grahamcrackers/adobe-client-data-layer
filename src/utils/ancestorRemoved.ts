@@ -10,9 +10,8 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../../custom-lodash');
-const has = _.has;
-const get = _.get;
+import has from "lodash/has";
+import get from "lodash/get";
 
 /**
   * Checks if the object contains an ancestor that is set to null or undefined.
@@ -22,7 +21,7 @@ const get = _.get;
   * @returns {Boolean} true if the object contains an ancestor that is set to null or undefined, false otherwise.
   * @private
   */
-module.exports = function(object, path) {
+export const ancestorRemoved = (object: Object, path: string): boolean =>{
   let ancestorPath = path.substring(0, path.lastIndexOf('.'));
   while (ancestorPath) {
     if (has(object, ancestorPath)) {

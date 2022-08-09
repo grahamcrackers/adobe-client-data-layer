@@ -10,13 +10,13 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../../custom-lodash');
-const cloneDeepWith = _.cloneDeepWith;
-const isObject = _.isObject;
-const isArray = _.isArray;
-const reject = _.reject;
-const mergeWith = _.mergeWith;
-const isNull = _.isNull;
+import cloneDeepWith from "lodash/cloneDeepWith";
+import isObject from "lodash/isObject";
+import isArray from "lodash/isArray";
+import reject from "lodash/reject";
+import mergeWith from "lodash/mergeWith";
+import isNull from "lodash/isNull";
+import type { ListIterateeCustom } from "lodash";
 
 /**
  * Merges the source into the object and sets objects as 'undefined' if they are 'undefined' in the source object.
@@ -25,7 +25,7 @@ const isNull = _.isNull;
  * @param {Object} source The source to merge with.
  * @returns {Object} The object into which source was merged in.
  */
-module.exports = function(object, source) {
+module.exports = function(object: Object, source: Object): Object {
   const makeOmittingCloneDeepCustomizer = function(predicate) {
     return function omittingCloneDeepCustomizer(value, key, object, stack) {
       if (isObject(value)) {

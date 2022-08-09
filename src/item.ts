@@ -10,15 +10,14 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../custom-lodash');
-const isPlainObject = _.isPlainObject;
-const isEmpty = _.isEmpty;
-const omit = _.omit;
-const find = _.find;
+import isPlainObject from "lodash/isPlainObject";
+import isEmpty from "lodash/isEmpty";
+import omit from "lodash/omit";
+import find from "lodash/find";
 
-const dataMatchesContraints = require('./utils/dataMatchesContraints');
-const ITEM_CONSTRAINTS = require('./itemConstraints');
-const CONSTANTS = require('./constants');
+import { dataMatchesContraints } from "./utils/dataMatchesContraints";
+import { itemConstraints as ITEM_CONSTRAINTS } from "./itemConstraints";
+import { CONSTANTS } from "./constants";
 
 /**
  * Constructs a data layer item.
@@ -27,7 +26,7 @@ const CONSTANTS = require('./constants');
  * @param {Number} index The item index in the array of existing items.
  */
 
-module.exports = function(itemConfig, index) {
+export const item = (itemConfig, index: number) => {
   const _config = itemConfig;
   const _index = index;
   const _type = getType();
@@ -35,9 +34,13 @@ module.exports = function(itemConfig, index) {
   const _valid = !!_type;
 
   function getType() {
-    return find(Object.keys(ITEM_CONSTRAINTS), key => dataMatchesContraints(_config, ITEM_CONSTRAINTS[key])) ||
-      (typeof _config === 'function' && CONSTANTS.itemType.FCTN) ||
-      (isPlainObject(_config) && CONSTANTS.itemType.DATA);
+    return (
+      find(Object.keys(ITEM_CONSTRAINTS), key =>
+        dataMatchesContraints(_config, ITEM_CONSTRAINTS[key])
+      ) ||
+      (typeof _config === "function" && CONSTANTS.itemType.FCTN) ||
+      (isPlainObject(_config) && CONSTANTS.itemType.DATA)
+    );
   }
 
   function getData() {

@@ -10,16 +10,19 @@ OF ANY KIND, either express or implied. See the License for the specific languag
 governing permissions and limitations under the License.
 */
 
-const _ = require('../custom-lodash');
-const version = require('../version.json').version;
-const cloneDeep = _.cloneDeep;
-const get = _.get;
+//const _ = require('../custom-lodash');
+//const version = require('../version.json').version;
+import {version} from "../version.json";
+// const cloneDeep = _.cloneDeep;
+import cloneDeep from "lodash/cloneDeep";
+// const get = _.get;
+import get from "lodash/get";
 
-const Item = require('./item');
-const Listener = require('./listener');
-const ListenerManager = require('./listenerManager');
-const CONSTANTS = require('./constants');
-const customMerge = require('./utils/customMerge');
+const Item = require("./item");
+const Listener = require("./listener");
+const ListenerManager = require("./listenerManager");
+const CONSTANTS = require("./constants");
+const customMerge = require("./utils/customMerge");
 
 /**
  * Manager
@@ -61,10 +64,10 @@ module.exports = function(config) {
     // Remove preloaded items from the data layer array and add those to the array of preloaded items
     _preLoadedItems = _config.dataLayer.splice(0, _config.dataLayer.length);
     _dataLayer = _config.dataLayer;
-    _dataLayer.version = version;
+    _dataLayer.version = __VERSION__;
     _state = {};
     _listenerManager = ListenerManager(DataLayerManager);
-  };
+  }
 
   /**
    * Updates the state with the item.
@@ -74,7 +77,7 @@ module.exports = function(config) {
    */
   function _updateState(item) {
     _state = customMerge(_state, item.data);
-  };
+  }
 
   /**
    * Augments the data layer Array Object, overriding: push() and adding getState(), addEventListener and removeEventListener.
@@ -88,7 +91,8 @@ module.exports = function(config) {
      * @param {...ItemConfig} var_args The items to add to the data layer.
      * @returns {Number} The length of the data layer following push.
      */
-    _dataLayer.push = function(var_args) { /* eslint-disable-line camelcase */
+    _dataLayer.push = function(var_args) {
+      /* eslint-disable-line camelcase */
       const pushArguments = arguments;
       const filteredArguments = arguments;
 
@@ -181,7 +185,7 @@ module.exports = function(config) {
 
       _processItem(eventListenerItem);
     };
-  };
+  }
 
   /**
    * Processes all items that already exist on the stack.
@@ -192,7 +196,7 @@ module.exports = function(config) {
     for (let i = 0; i < _preLoadedItems.length; i++) {
       _dataLayer.push(_preLoadedItems[i]);
     }
-  };
+  }
 
   /**
    * Processes an item pushed to the stack.
@@ -215,7 +219,9 @@ module.exports = function(config) {
      */
     function _getBefore(item) {
       if (!(_dataLayer.length === 0 || item.index > _dataLayer.length - 1)) {
-        return _dataLayer.slice(0, item.index).map(itemConfig => Item(itemConfig));
+        return _dataLayer
+          .slice(0, item.index)
+          .map(itemConfig => Item(itemConfig));
       }
       return [];
     }
@@ -263,7 +269,7 @@ module.exports = function(config) {
     };
 
     typeProcessors[item.type](item);
-  };
+  }
 
   /**
    * Logs error for invalid item pushed to the data layer.
@@ -272,11 +278,12 @@ module.exports = function(config) {
    * @private
    */
   function _logInvalidItemError(item) {
-    const message = 'The following item cannot be handled by the data layer ' +
-      'because it does not have a valid format: ' +
+    const message =
+      "The following item cannot be handled by the data layer " +
+      "because it does not have a valid format: " +
       JSON.stringify(item.config);
     console.error(message);
-  };
+  }
 
   return DataLayerManager;
 };
