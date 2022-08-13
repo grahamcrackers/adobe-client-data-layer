@@ -34,6 +34,6 @@
     "noImplicitAny": false,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "types", "version.json"],
+  "include": ["src/**/*.ts", "src/index.d.ts", "types"],
   "exclude": ["node_modules", "test", "dist", "gulp", "examples"]
 }

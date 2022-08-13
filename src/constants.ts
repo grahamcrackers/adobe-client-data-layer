@@ -9,6 +9,10 @@ the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTA
 OF ANY KIND, either express or implied. See the License for the specific language
 governing permissions and limitations under the License.
 */
+
+/**
+ * @deprecated
+ */
 export const CONSTANTS = {
   /**
    * @typedef {String} ItemType
@@ -22,15 +26,15 @@ export const CONSTANTS = {
    */
   itemType: {
     /** Represents an item of type data */
-    DATA: 'data',
+    DATA: "data",
     /** Represents an item of type function */
-    FCTN: 'fctn',
+    FCTN: "fctn",
     /** Represents an item of type event */
-    EVENT: 'event',
+    EVENT: "event",
     /** Represents an item of type listener on */
-    LISTENER_ON: 'listenerOn',
+    LISTENER_ON: "listenerOn",
     /** Represents an item of type listener off */
-    LISTENER_OFF: 'listenerOff'
+    LISTENER_OFF: "listenerOff"
   },
 
   /**
@@ -45,9 +49,9 @@ export const CONSTANTS = {
    */
   dataLayerEvent: {
     /** Represents an event triggered for any change in the data layer state */
-    CHANGE: 'adobeDataLayer:change',
+    CHANGE: "adobeDataLayer:change",
     /** Represents an event triggered for any event push to the data layer */
-    EVENT: 'adobeDataLayer:event'
+    EVENT: "adobeDataLayer:event"
   },
 
   /**
@@ -62,11 +66,60 @@ export const CONSTANTS = {
    */
   listenerScope: {
     /** Past events only */
-    PAST: 'past',
+    PAST: "past",
     /** Future events only */
-    FUTURE: 'future',
+    FUTURE: "future",
     /** All events, past and future */
-    ALL: 'all'
+    ALL: "all"
   }
 };
 
+/** accepted data layer types */
+export declare type ItemType =
+  | "data"
+  | "fctn"
+  | "event"
+  | "listenerOn"
+  | "listenerOff";
+
+/**
+ * Enumeration of data layer item types.
+ *
+ * @readonly
+ */
+export const itemType: Record<string, ItemType> = {
+  /** Represents an item of type data */
+  DATA: "data",
+  /** Represents an item of type function */
+  FCTN: "fctn",
+  /** Represents an item of type event */
+  EVENT: "event",
+  /** Represents an item of type listener on */
+  LISTENER_ON: "listenerOn",
+  /** Represents an item of type listener off */
+  LISTENER_OFF: "listenerOff"
+};
+
+/** accepted data-layer event types */
+export declare type DataLayerEvent =
+  | "adobeDataLayer:change"
+  | "adobeDataLayer:event";
+
+export const dataLayerEvent: Record<string, DataLayerEvent> = {
+  /** Represents an event triggered for any change in the data layer state */
+  CHANGE: "adobeDataLayer:change",
+  /** Represents an event triggered for any event push to the data layer */
+  EVENT: "adobeDataLayer:event"
+};
+
+/** accepted listener scope types */
+export declare type ListenerScope = "past" | "future" | "all";
+
+export const listenerScope: Record<string, ListenerScope> = {
+  /** Past events only */
+  PAST: "past",
+  /** Future events only */
+  FUTURE: "future",
+  /** All events, past and future */
+  ALL: "all"
+};

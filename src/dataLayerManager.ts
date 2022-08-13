@@ -12,7 +12,7 @@ governing permissions and limitations under the License.
 
 //const _ = require('../custom-lodash');
 //const version = require('../version.json').version;
-import {version} from "../version.json";
+import { version } from "../version.json";
 // const cloneDeep = _.cloneDeep;
 import cloneDeep from "lodash/cloneDeep";
 // const get = _.get;
